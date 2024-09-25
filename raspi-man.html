@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="max-image-preview:large" />
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=7; IE=9; IE=10; IE=11" />
+<style>
+.numb {
+  font-size: larger;
+}
+.term {
+  background-color: black;
+  color: white;
+  width: 50%;
+  margin-left: 1em;
+  padding-left: 1em;
+  padding-top: 1em;
+  padding-bottom: 1em;
+ }
+.conf {
+  background-color: black;
+  color: white;
+  width: 50%;
+  margin-left: 1em;
+  padding-left: 1em;
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+</style>
+<title>Raspbery Pi/固定IP設定</title>
+<link rel="icon" href="img/rp.png" type="image/png">
+</head>
+<body>
+<h3>固定IPアドレスの設定</h3>
+<p><span class="numb">1️⃣</span> ラズパイにモニタ及びキーボードとマウスを接続します。</p>
+<p><span class="numb">2️⃣</span> ラズパイのデスクトップ画面が表示されたら左上の「ラズパイアイコン」→「アクセサリ」→「LXTerminal」をクリックしてターミナルを起動します。</p>
+<p><span class="numb">3️⃣</span> ターミナルから下記コマンドで"dhcpcd.conf"ファイルを開いて、最下行付近の"interface eth0"以下のIPアドレス部分を編集します。</p>
+<div class="term">
+<span style="color:blue">$</span> sudo nano /etc/dhcpcd.conf
+</div>
+<br>
+<div class="conf">
+  .....<br>
+  interface wlan0<br>
+static ip_address=192.168.1.206/24<br>
+static routers=192.168.1.1<br>
+static domain_name_servers=192.168.1.1 8.8.8.8<br>
+interface eth0<br>
+static ip_address=192.168.1.120<br>
+static routers=192.168.1.1<br>
+static domain_name_servers=192.168.1.1 8.8.8.8<br>
+</div>
+<ul>
+<li>interface ⇒ eth0</li>
+<li>static ip_address ⇒ 固定IPアドレス</li>
+<li>static routers ⇒ デフォルトゲートウェイのIPアドレス</li>
+<li>static domain_name_servers ⇒ DNSサーバーのIPアドレス</li>
+</ul>
+<br>
+<p><span class="numb">4️⃣</span> ctrl+oで上書き保存、ctrl+xでnanoエディタを終了します。</p>
+<p><span class="numb">5️⃣</span> 下記コマンドで再起動すると設定が有効になります。</p>
+<div class="term">
+<span style="color:blue">$</span> sudo reboot
+</div>
+※ 再起動後 "ifconfig"コマンドで設定したIPアドレスになっていることを確認してください。
+</body>
+</html>
