@@ -46,7 +46,7 @@ $slots = $slb->getEntries();
         <p class="text-end txt_margin-3">
           <button id="btn-save-cmd1" class="btn btn-primary btn-sm btn-top-slot" onclick="winOpen('sw_slot.php?id=0');"><i class="bi bi-plus-circle-fill"> 追加</i></button>
           
-          <span>　</span><a href="raspi-man.html" target="_blank"><button style="background:transparent;border:none;"><img src="img/rp.png" width="24"></button></a>
+          <span>　</span><a href="raspi-man.html" target="_blank"><button id="btn-manual" style="background:transparent;border:none;"><img src="img/rp.png" width="24"></button></a>
 
         </p>
         <table id="slot-table" class="table">
@@ -82,6 +82,9 @@ $(function() {
     $('#frm').submit();
   });
   $('.nav-tabs a[href="#profile1"]').tab('show');
+  $("#btn-manual").on('click', function () { // ラズパイマニュアル
+    let win = window.open("raspi-man.html", "manual_window", "width=900,height=700,scrollbars=yes,resizable=yes,status=yes");
+  });
 });
 </script>
 </body>
